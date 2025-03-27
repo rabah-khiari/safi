@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Logo</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
@@ -17,13 +17,30 @@
           @endif
           
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Dropdown</a>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Clients</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Link</a></li>
-              <li><a class="dropdown-item" href="#">Another link</a></li>
+              <li><a class="dropdown-item" href="/clients/create">Create client</a></li>
+              <li><a class="dropdown-item" href="/clients">client</a></li>
               <li><a class="dropdown-item" href="#">A third link</a></li>
             </ul>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/extinguishers">extinguishers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/purchases">purchases</a>
+          </li>
+          
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">interventions</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/interventions/create">Create intervention</a></li>
+              <li><a class="dropdown-item" href="/interventions">intervention</a></li>
+              <li><a class="dropdown-item" href="/interventions/schedule">Schedule</a></li>
+            </ul>
+          </li>
+          
           <li class="nav-item">
             @if (auth()->check()) 
                 <a class="nav-link" href="/logout">logout</a>
