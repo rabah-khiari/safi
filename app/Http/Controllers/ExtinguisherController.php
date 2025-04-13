@@ -9,14 +9,14 @@ class ExtinguisherController extends Controller
     // Show all extinguishers
     public function index()
     {
-        $extinguishers = Extinguisher::all();
-        return view('extinguishers.index', compact('extinguishers'));
+        $extinguishers = Extinguisher::paginate(30);
+        return view('extincteur.index', compact('extinguishers'));
     }
 
     // Show the create form
     public function create()
     {
-        return view('extinguishers.create');
+        return view('extincteur.create');
     }
 
     // Store a new extinguisher
@@ -30,14 +30,14 @@ class ExtinguisherController extends Controller
 
         Extinguisher::create($request->all());
 
-        return redirect()->route('extinguishers.index')->with('success', 'Extinguisher added successfully!');
+        return redirect()->route('extincteur.index')->with('success', 'extincteur added successfully!');
     }
 
     // Show edit form
     public function edit($id)
     {
         $extinguisher = Extinguisher::findOrFail($id);
-        return view('extinguishers.edit', compact('extinguisher'));
+        return view('extincteur.edit', compact('extinguisher'));
     }
 
     // Update extinguisher
@@ -52,7 +52,7 @@ class ExtinguisherController extends Controller
         $extinguisher = Extinguisher::findOrFail($id);
         $extinguisher->update($request->all());
 
-        return redirect()->route('extinguishers.index')->with('success', 'Extinguisher updated successfully!');
+        return redirect()->route('extincteur.index')->with('success', 'Extinguisher updated successfully!');
     }
 
     // Delete extinguisher
@@ -61,6 +61,6 @@ class ExtinguisherController extends Controller
         $extinguisher = Extinguisher::findOrFail($id);
         $extinguisher->delete();
 
-        return redirect()->route('extinguishers.index')->with('success', 'Extinguisher deleted successfully!');
+        return redirect()->route('extincteur.index')->with('success', 'Extinguisher deleted successfully!');
     }
 }

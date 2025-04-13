@@ -30,9 +30,9 @@ Route::put('/clients/{client_id}', [ClientsController::class, 'update'])->name('
 Route::get('/interventions', [InterventionController::class, 'index'])->name('interventions.index');
 Route::get('/interventions/create', [InterventionController::class, 'create'])->name('interventions.create');
 Route::post('/interventions/store', [InterventionController::class, 'store'])->name('interventions.store');
-Route::get('/interventions/schedule', [InterventionController::class, 'scheduleInterventions'])->name('interventions.schedule');
 
-Route::resource('extinguishers', ExtinguisherController::class);
+
+Route::resource('extincteur', ExtinguisherController::class);
 
 Route::resource('purchases', PurchaseController::class);
 

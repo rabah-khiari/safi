@@ -8,9 +8,40 @@ use App\Models\Purchase;
 use App\Models\Intervention;
 
 class ClientsController extends Controller {
-    public function index()
+    public function index(Request $request)
     {
-        return view('clients.index', ['clients' => Client::all()]);
+        $query = Client::query();
+
+        // Filtering by wilaya and commune
+        if ($request->filled('wilaya')) {
+            $query->where('wilaya', $request->wilaya);
+        }
+    
+        if ($request->filled('commune')) {
+            $query->where('commune', $request->commune);
+        }
+    
+        $clients = $query->paginate(30);
+    
+        $wilayaData = include resource_path('views/layouts/wilaya_commune_list.php');
+    
+        $wilayas = [];
+        $communes = [];
+    
+        foreach ($wilayaData as $key => $communeList) {
+            // "44 Aïn Defla" => split to ["44", "Aïn Defla"]
+            $parts =$key;
+            $number = $parts;
+            $name = $key;
+            $wilayas[$name] = $name; // or "$number - $name" as key
+    
+            if ($request->wilaya === $name) {
+                $communes = $communeList;
+            }
+        }
+    
+        return view('clients.index', compact('clients', 'wilayas', 'communes'));
+
     }
     // Show the create client form
     public function create()

@@ -5,6 +5,38 @@
     <a class="btn btn-primary btn-sm" href="{{ route('clients.create') }}">Add Client</a>
 <div class="container">
 
+    
+    <form method="GET" action="{{ route('clients.index') }}" class="row g-3 mb-4">
+        <div class="col-md-4">
+            <label for="wilaya" class="form-label">Wilaya</label>
+            <select name="wilaya" id="wilaya" class="form-control" onchange="this.form.submit()">
+                <option value="">-- All Wilayas --</option>
+                @foreach ($wilayas as $wilaya)
+                    <option value="{{ $wilaya }}" {{ request('wilaya') == $wilaya ? 'selected' : '' }}>
+                        {{ $wilaya }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+    
+        <div class="col-md-4">
+            <label for="commune" class="form-label">Commune</label>
+            <select name="commune" id="commune" class="form-control">
+                <option value="">-- All Communes --</option>
+                @foreach ($communes as $commune)
+                    <option value="{{ $commune }}" {{ request('commune') == $commune ? 'selected' : '' }}>
+                        {{ $commune }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+    
+        <div class="col-md-4 d-flex align-items-end">
+            <button class="btn btn-primary" type="submit">Filter</button>
+            <a href="{{ route('clients.index') }}" class="btn btn-secondary ms-2">Reset</a>
+        </div>
+    </form>
+
     <table class="table table-striped">
         <tr>
             <th>Name</th>
@@ -38,6 +70,14 @@
             </tr>
         @endforeach
     </table>
+    @php
+        use Illuminate\Pagination\Paginator;
+        Paginator::useBootstrap(); 
+    @endphp
+    <div class="d-flex justify-content-center mt-4">
+        {{ $clients->links() }}
+    </div>
+
 </div>
 
 @endsection

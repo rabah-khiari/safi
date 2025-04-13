@@ -35,4 +35,12 @@
             </tr>
         @endforeach
     </table>
+
+    @php
+        use Illuminate\Pagination\Paginator;
+        Paginator::useBootstrap(); 
+    @endphp
+    <div class="d-flex justify-content-center mt-4">
+        {{ $purchases->links() }}
+    </div>
 @endsection

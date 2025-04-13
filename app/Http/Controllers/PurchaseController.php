@@ -12,7 +12,8 @@ class PurchaseController extends Controller
     // Show all purchases
     public function index()
     {
-        $purchases = Purchase::with(['client', 'extinguisher'])->orderBy('purchase_id', 'desc')->get();
+        $purchases = Purchase::with(['client', 'extinguisher'])->orderBy('purchase_id', 'desc')->paginate(30);
+       
         return view('purchases.index', compact('purchases'));
     }
 

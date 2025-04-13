@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Client extends Model {
     use HasFactory;
     protected $primaryKey = 'client_id';
-    protected $fillable = ['type', 'name', 'address', 'phone1', 'phone2', 'email'];
+    protected $fillable = ['type', 'name', 'address', 'phone1', 'phone2', 'email','wilaya','commune'];
 
     public function purchases() {
         return $this->hasMany(Purchase::class,'client_id', 'client_id');

@@ -16,29 +16,44 @@
                 </li>
           @endif
           
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Clients</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/clients/create">Create client</a></li>
-              <li><a class="dropdown-item" href="/clients">client</a></li>
-              <li><a class="dropdown-item" href="#">A third link</a></li>
-            </ul>
+          <li class="nav-item">
+            <a class="nav-link" href="/clients">client</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/extinguishers">extinguishers</a>
+            <a class="nav-link" href="/extincteur">extincteur</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/purchases">purchases</a>
           </li>
-          
-          
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">interventions</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/interventions/create">Create intervention</a></li>
-              <li><a class="dropdown-item" href="/interventions">intervention</a></li>
-              <li><a class="dropdown-item" href="/interventions/schedule">Schedule</a></li>
-            </ul>
+
+          @php
+            use Illuminate\Support\Facades\Cache;
+
+          if (!isset($expiringInterventions)){
+            $notificationDays = Cache::get('alert_days', 10); // Default to 10 days
+            
+
+            $today = Carbon\Carbon::today();
+            // Get all interventions and filter with collection (easier logic)
+            $expiringInterventions = App\Models\Intervention::with('client')->get()->filter(function ($intervention) use ($today, $notificationDays) {
+                $expiryDate = Carbon\Carbon::parse($intervention->intervention_date)->addMonths(6);
+                $alertStartDate = $expiryDate->copy()->subDays($notificationDays);
+                return $today->between($alertStartDate, $expiryDate);
+            });
+          }
+              
+          @endphp
+
+          <li class="nav-item"> 
+            @if ($expiringInterventions->count() > 0)
+              <a href="/interventions" class="notification">
+                <span>interventions </span>
+                <span class="badge"> {{$expiringInterventions->count()}} </span>
+              </a>
+            @else
+
+            <a class="nav-link" href="/interventions">interventions</a>
+            @endif
           </li>
           
           <li class="nav-item">
@@ -47,9 +62,37 @@
             @else
                 <a class="nav-link" href="/login">login</a>
             @endif
+            
           </li>
+          
         </ul>
       </div>
     </div>
   </nav>
-  
+
+  <style>
+    
+    .notification {
+      background-color: #ffffffc4;
+      color: rgb(0, 0, 0);
+      text-decoration: none;
+      padding: 10px 10px;
+      position: relative;
+      display: inline-block;
+      border-radius: 2px;
+    }
+    
+    /* .notification:hover {
+      background: rgb(255, 255, 255);
+    } */
+    
+    .notification .badge {
+      position: absolute;
+      top: -7px;
+      right: -8px;
+      padding: 5px 10px;
+      border-radius: 50%;
+      background-color: rgba(249, 81, 81, 0.805);
+      color: white;
+    }
+    </style>
