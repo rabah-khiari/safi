@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2 class="mb-4">Add New Client</h2>
+    <h2 class="mb-4">Ajouter un nouveau client</h2>
 
     {{-- Display Validation Errors --}}
     @if ($errors->any())
@@ -24,54 +24,54 @@
         @csrf {{-- Security Token --}}
 
         <div class="mb-3">
-            <label for="type" class="form-label">Client Type:</label>
+            <label for="type" class="form-label">Type de client :</label>
             <select name="type" id="type" class="form-control" required>
-                <option value="person">Person</option>
-                <option value="enterprise">Enterprise</option>
+                <option value="person">particulière</option>
+                <option value="enterprise">Entreprise</option>
             </select>
         </div>
 
         <div class="mb-3">
-            <label for="name" class="form-label">Client Name:</label>
+            <label for="name" class="form-label">Nom du client :</label>
             <input type="text" name="name" id="name" class="form-control" required>
         </div>
 
         <div class="mb-3">
-            <label for="address" class="form-label">Address:</label>
+            <label for="address" class="form-label">Adresse:</label>
             <input type="text" name="address" id="address" class="form-control" required>
         </div>
 
         <div class="mb-3">
-            <label for="phone1" class="form-label">Phone 1:</label>
+            <label for="phone1" class="form-label">Téléphone 1:</label>
             <input type="text" name="phone1" id="phone1" class="form-control" required>
         </div>
 
         <div class="mb-3">
-            <label for="phone2" class="form-label">Phone 2 (Optional):</label>
+            <label for="phone2" class="form-label">PhoTéléphonene 2 (optionnel):</label>
             <input type="text" name="phone2" id="phone2" class="form-control">
         </div>
 
         <div class="mb-3">
-            <label for="email" class="form-label">Email (Optional):</label>
+            <label for="email" class="form-label">Email (optionnel):</label>
             <input type="email" name="email" id="email" class="form-control">
         </div>
 
         <div class="mb-3">
             <label for="wilaya" class="form-label">Wilaya:</label>
             <select name="wilaya" id="wilaya" class="form-control" required>
-                <option value="">-- Select Wilaya --</option>
+                <option value="">-- Sélectionnez Wilaya --</option>
             </select>
         </div>
         
         <div class="mb-3">
             <label for="commune" class="form-label">Commune:</label>
             <select name="commune" id="commune" class="form-control" required>
-                <option value="">-- Select Commune --</option>
+                <option value="">-- Sélectionnez Commune --</option>
             </select>
         </div>
         
 
-        <button type="submit" class="btn btn-primary">Add Client</button>
+        <button type="submit" class="btn btn-primary">Ajouter un client</button>
     </form>
 </div>
 

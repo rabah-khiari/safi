@@ -7,23 +7,15 @@
       </button>
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          @if (auth()->check()) 
-                <li class="nav-item">
-                  <a class="nav-link" href="/dashboard">dashboard</a>
-                </li>
-          @endif
           
           <li class="nav-item">
-            <a class="nav-link" href="/clients">client</a>
+            <a class="nav-link" href="/clients">Client</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/extincteur">extincteur</a>
+            <a class="nav-link" href="/extincteur">Extincteur</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/purchases">purchases</a>
+          <li class="nav-item" hidden>
+            <a class="nav-link" href="/purchases">Affectation Extincteur</a>
           </li>
 
           @php
@@ -32,7 +24,6 @@
           if (!isset($expiringInterventions)){
             $notificationDays = Cache::get('alert_days', 10); // Default to 10 days
             
-
             $today = Carbon\Carbon::today();
             // Get all interventions and filter with collection (easier logic)
             $expiringInterventions = App\Models\Intervention::with('client')->get()->filter(function ($intervention) use ($today, $notificationDays) {
@@ -41,14 +32,25 @@
                 return $today->between($alertStartDate, $expiryDate);
             });
           }
-              
+          if (!isset($expiringExtincteur)){
+            $notificationDays = Cache::get('alert_days', 10); // Default to 10 days
+            
+            $today = Carbon\Carbon::today();
+            // Get all interventions and filter with collection (easier logic)
+            $expiringExtincteur = App\Models\Purchase::with('client')->get()->filter(function ($intervention) use ($today, $notificationDays) {
+                $expiryDate = Carbon\Carbon::parse($intervention->intervention_date)->addMonths(6);
+                $alertStartDate = $expiryDate->copy()->subDays($notificationDays);
+                return $today->between($alertStartDate, $expiryDate);
+            });
+          }
+          $total_Expiring= $expiringExtincteur->count()+$expiringInterventions->count();
           @endphp
 
           <li class="nav-item"> 
-            @if ($expiringInterventions->count() > 0)
+            @if ($total_Expiring > 0)
               <a href="/interventions" class="notification">
                 <span>interventions </span>
-                <span class="badge"> {{$expiringInterventions->count()}} </span>
+                <span class="badge"> {{$total_Expiring}} </span>
               </a>
             @else
 
@@ -58,9 +60,9 @@
           
           <li class="nav-item">
             @if (auth()->check()) 
-                <a class="nav-link" href="/logout">logout</a>
+                <a class="nav-link" href="/logout">déconnexion</a>
             @else
-                <a class="nav-link" href="/login">login</a>
+                <a class="nav-link" href="/login">se connecter</a>
             @endif
             
           </li>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>Edit extincteur</h2>
+    <h2>Editer extincteur</h2>
 
     <form action="{{ route('extincteur.update', $extinguisher->extinguisher_id) }}" method="POST">
         @csrf
@@ -16,6 +16,6 @@
         <label class="form-label"> Stock:</label>
         <input class="form-control" type="number" name="stock" value="{{ $extinguisher->stock }}" required><br>
 
-        <button class="btn btn-primary" type="submit">Update</button>
+        <button class="btn btn-primary" type="submit">Mise à jour</button>
     </form>
 @endsection

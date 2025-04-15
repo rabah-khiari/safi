@@ -2,7 +2,7 @@
 
 @section('content')
     <h2>extincteur</h2>
-    <a class="btn btn-primary" href="{{ route('extincteur.create') }}">Add New extincteur</a>
+    <a class="btn btn-primary" href="{{ route('extincteur.create') }}">Ajouter un nouvel extincteur</a>
 
     @if(session('success'))
         <p style="color: green;">{{ session('success') }}</p>
@@ -23,11 +23,11 @@
                 <td>{{ $extinguisher->size }} L</td>
                 <td>{{ $extinguisher->stock }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ route('extincteur.edit', $extinguisher->extinguisher_id) }}">Edit</a>
+                    <a class="btn btn-success" href="{{ route('extincteur.edit', $extinguisher->extinguisher_id) }}">Editer</a>
                     <form action="{{ route('extincteur.destroy', $extinguisher->extinguisher_id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-primary" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                        <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure?')">Supprimer</button>
                     </form>
                 </td>
             </tr>

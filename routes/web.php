@@ -29,13 +29,18 @@ Route::put('/clients/{client_id}', [ClientsController::class, 'update'])->name('
 
 Route::get('/interventions', [InterventionController::class, 'index'])->name('interventions.index');
 Route::get('/interventions/create', [InterventionController::class, 'create'])->name('interventions.create');
+Route::get('/interventions/create/{intervention_id}', [InterventionController::class, 'create'])->name('interventions.create');
 Route::post('/interventions/store', [InterventionController::class, 'store'])->name('interventions.store');
+Route::delete('/interventions/destroy/{intervention_id}', [InterventionController::class, 'destroy'])->name('interventions.destroy');
 
 
 Route::resource('extincteur', ExtinguisherController::class);
 
 Route::resource('purchases', PurchaseController::class);
+Route::get('/purchases/create/{client_id}', [PurchaseController::class, 'create'])->name('clients.update');
 
-Route::get('/clients/{client_id}/details', [ClientsController::class, 'showPurchasesAndInterventions'])
-    ->name('clients.details');
-});
+
+Route::get('/clients/{client_id}/details', [ClientsController::class, 'showPurchasesAndInterventions'])->name('clients.details');
+
+
+});//authentication 

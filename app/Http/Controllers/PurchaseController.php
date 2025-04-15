@@ -13,14 +13,15 @@ class PurchaseController extends Controller
     public function index()
     {
         $purchases = Purchase::with(['client', 'extinguisher'])->orderBy('purchase_id', 'desc')->paginate(30);
-       
         return view('purchases.index', compact('purchases'));
     }
 
     // Show the create form
-    public function create()
+    public function create($id)
     {
-        $clients = Client::all();
+        
+        $clients = Client::findOrFail($id);
+        
         $extinguishers = Extinguisher::all();
         return view('purchases.create', compact('clients', 'extinguishers'));
     }
@@ -36,8 +37,9 @@ class PurchaseController extends Controller
         ]);
 
         Purchase::create($request->all());
-
-        return redirect()->route('purchases.index')->with('success', 'Purchase added successfully!');
+        return redirect()->route('clients.details', ['client_id' => $request->client_id])
+                          ->with('success', 'Purchase added successfully!');
+        
     }
 
     // Show edit form
@@ -62,7 +64,8 @@ class PurchaseController extends Controller
         $purchase = Purchase::findOrFail($id);
         $purchase->update($request->all());
 
-        return redirect()->route('purchases.index')->with('success', 'Purchase updated successfully!');
+        return redirect()->route('clients.details', ['client_id' => $request->client_id])
+                          ->with('success', 'Purchase added successfully!');
     }
 
     // Delete purchase
@@ -71,6 +74,7 @@ class PurchaseController extends Controller
         $purchase = Purchase::findOrFail($id);
         $purchase->delete();
 
-        return redirect()->route('purchases.index')->with('success', 'Purchase deleted successfully!');
+        return redirect()->back()->with('success', 'Purchase added successfully!');
+
     }
 }

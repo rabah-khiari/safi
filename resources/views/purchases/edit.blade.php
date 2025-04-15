@@ -1,23 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>Edit Purchase</h2>
+    <h2>Editer affectation pour : {{$purchase->client->name}} </h2>
 
     <form action="{{ route('purchases.update', $purchase->purchase_id) }}" method="POST">
         @csrf
         @method('PUT')
 
-        <label>Client:</label>
-        <select name="client_id" required>
-            @foreach($clients as $client)
-                <option value="{{ $client->client_id }}" {{ $purchase->client_id == $client->client_id ? 'selected' : '' }}>
-                    {{ $client->name }}
+       
+        <select class="form-control" name="client_id" required hidden>
+                <option value="{{ $purchase->client->client_id }}" selected>
+                    {{ $purchase->client->name }}
                 </option>
-            @endforeach
         </select>
 
-        <label>Extinguisher:</label>
-        <select name="extinguisher_id" required>
+        <label>Extincteur:</label>
+        <select class="form-control" name="extinguisher_id" required>
             @foreach($extinguishers as $extinguisher)
                 <option value="{{ $extinguisher->extinguisher_id }}" {{ $purchase->extinguisher_id == $extinguisher->extinguisher_id ? 'selected' : '' }}>
                     {{ $extinguisher->type }} - {{ $extinguisher->size }}L
@@ -25,12 +23,12 @@
             @endforeach
         </select>
 
-        <label>Quantity:</label>
-        <input type="number" name="quantity" value="{{ $purchase->quantity }}" required>
+        <label class="form-label">Quantité:</label>
+        <input class="form-control" type="number" name="quantity" value="{{ $purchase->quantity }}" required>
 
-        <label>Intervention Date:</label>
-        <input type="date" name="intervention_date" value="{{ $purchase->intervention_date }}" required>
+        <label class="form-label">Date d'intervention:</label>
+        <input class="form-control" type="date" name="intervention_date" value="{{ $purchase->intervention_date }}" required>
 
-        <button type="submit">Update</button>
+        <button class="btn btn-primary" type="submit">Mise à jour</button>
     </form>
 @endsection

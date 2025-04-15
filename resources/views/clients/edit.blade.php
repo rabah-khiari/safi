@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2 class="mb-4">Edit Client</h2>
+    <h2 class="mb-4">Modifier le client</h2>
 
     {{-- Display Validation Errors --}}
     @if ($errors->any())
@@ -26,53 +26,53 @@
         @method('PUT') {{-- Laravel uses this for update requests --}}
 
         <div class="mb-3">
-            <label for="type" class="form-label">Client Type:</label>
+            <label for="type" class="form-label">Type de client :</label>
             <select name="type" id="type" class="form-control" required>
-                <option value="person" {{ $client->type == 'person' ? 'selected' : '' }}>Person</option>
-                <option value="enterprise" {{ $client->type == 'enterprise' ? 'selected' : '' }}>Enterprise</option>
+                <option value="person" {{ $client->type == 'person' ? 'selected' : '' }}>particulier</option>
+                <option value="enterprise" {{ $client->type == 'enterprise' ? 'selected' : '' }}>Entreprise</option>
             </select>
         </div>
 
         <div class="mb-3">
-            <label for="name" class="form-label">Client Name:</label>
+            <label for="name" class="form-label">Nom du client :</label>
             <input type="text" name="name" id="name" class="form-control" value="{{ $client->name }}" required>
         </div>
 
         <div class="mb-3">
-            <label for="address" class="form-label">Address:</label>
+            <label for="address" class="form-label">Addresse:</label>
             <input type="text" name="address" id="address" class="form-control" value="{{ $client->address }}" required>
         </div>
 
         <div class="mb-3">
-            <label for="phone1" class="form-label">Phone 1:</label>
+            <label for="phone1" class="form-label">Téléphone 1:</label>
             <input type="text" name="phone1" id="phone1" class="form-control" value="{{ $client->phone1 }}" required>
         </div>
 
         <div class="mb-3">
-            <label for="phone2" class="form-label">Phone 2 (Optional):</label>
+            <label for="phone2" class="form-label">Téléphone 2 (Optionnel):</label>
             <input type="text" name="phone2" id="phone2" class="form-control" value="{{ $client->phone2 }}">
         </div>
 
         <div class="mb-3">
-            <label for="email" class="form-label">Email (Optional):</label>
+            <label for="email" class="form-label">Téléphone (Optionnel):</label>
             <input type="email" name="email" id="email" class="form-control" value="{{ $client->email }}">
         </div>
         <div class="mb-3">
             <label for="wilaya" class="form-label">Wilaya:</label>
             <select name="wilaya" id="wilaya" class="form-control" required>
-                <option value="">-- Select Wilaya --</option>
+                <option value="">-- Sélectionnez Wilaya --</option>
             </select>
         </div>
         
         <div class="mb-3">
-            <label for="commune" class="form-label">Commune:</label>
+            <label for="commune" class="form-label">commune:</label>
             <select name="commune" id="commune" class="form-control" required>
-                <option value="">-- Select Commune --</option>
+                <option value="">-- Sélectionnez la commune --</option>
             </select>
         </div>
 
-        <button type="submit" class="btn btn-success">Update Client</button>
-        <a href="{{ route('clients.index') }}" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-success">Mettre à jour le client</button>
+        <a href="{{ route('clients.index') }}" class="btn btn-secondary">Annuler</a>
     </form>
 </div>
 

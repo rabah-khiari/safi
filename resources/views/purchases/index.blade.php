@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>Purchases</h2>
+    <h2>Affectation</h2>
     <a class="btn btn-primary" href="{{ route('purchases.create') }}">Add New Purchase</a>
 
     @if(session('success'))
@@ -11,10 +11,10 @@
     <table class="table">
         <tr>
             <th>ID</th>
-            <th>Client</th>
-            <th>Extinguisher</th>
-            <th>Quantity</th>
-            <th>Intervention Date</th>
+            <th>Cliente</th>
+            <th>Extincteur</th>
+            <th>Quantité</th>
+            <th>Date d'intervention</th>
             <th>Actions</th>
         </tr>
         @foreach($purchases as $purchase)
@@ -25,11 +25,11 @@
                 <td>{{ $purchase->quantity }}</td>
                 <td>{{ $purchase->intervention_date }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ route('purchases.edit', $purchase->purchase_id) }}">Edit</a>
+                    <a class="btn btn-success" href="{{ route('purchases.edit', $purchase->purchase_id) }}">Editer</a>
                     <form action="{{ route('purchases.destroy', $purchase->purchase_id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-primary" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                        <button class="btn btn-primary" type="submit" onclick="return confirm('Are you sure?')">Supprimer</button>
                     </form>
                 </td>
             </tr>

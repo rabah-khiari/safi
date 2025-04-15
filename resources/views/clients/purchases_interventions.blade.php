@@ -1,58 +1,85 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>Client Details: {{ $client->name }}</h2>
-    <p><strong>Address:</strong> {{ $client->address }}</p>
-    <p><strong>Phone:</strong> {{ $client->phone1 }} {{ $client->phone2 ? ', ' . $client->phone2 : '' }}</p>
-    <p><strong>Email:</strong> {{ $client->email ?? 'N/A' }}</p>
+<a class="btn btn-primary btn-sm" href="{{ url('/clients/' . $client->client_id . '/edit') }}" >Éditer le client </a>
+<br>
 
-    <hr>
+<br>
+<div class=" shadow"> 
+    <h2 class="text-center "> {{ $client->name }}</h2>
 
-    <h3>🛒 Purchases</h3>
-    <a class="btn btn-primary" href="{{ route('purchases.create') }}">Add New Purchase</a>
+    <p><strong> &nbsp; Addresse:</strong> {{ $client->address }}</p>
+    <p><strong> &nbsp; Téléphone:</strong> {{ $client->phone1 }} {{ $client->phone2 ? ', ' . $client->phone2 : '' }}</p>
+    <p><strong> &nbsp; Email:</strong> {{ $client->email ?? 'N/A' }}</p>
+
+</div>
+    <br>
+<div class="">
+    <br>
+    <h3>&nbsp;Affectation des extincteurs </h3>
+    &nbsp;<a class="btn btn-primary" href="{{url('/purchases/create/'.$client->client_id ) }}"> &nbsp;Ajouter un nouvel Affectation</a>
     @if($client->purchases->isEmpty())
-        <p>No purchases found.</p>
+        <p> &nbsp; Aucun Affectation trouvé.</p>
     @else
         <table class="table">
             <tr>
                 <th>ID</th>
-                <th>Extinguisher</th>
-                <th>Quantity</th>
-                <th>Intervention Date</th>
+                <th>extincteur</th>
+                <th>Quantité</th>
+                <th>Date d'intervention</th>
             </tr>
             @foreach($client->purchases as $purchase)
-                <tr>
+                <tr>&nbsp;
                     <td>{{ $purchase->purchase_id }}</td>
                     <td>{{ $purchase->extinguisher->type }} - {{ $purchase->extinguisher->size }}L</td>
                     <td>{{ $purchase->quantity }}</td>
                     <td>{{ $purchase->intervention_date }}</td>
+                    <td>
+                        <a class="btn btn-success" href="{{ route('purchases.edit', $purchase->purchase_id) }}">Editer</a>
+                        <form action="{{ route('purchases.destroy', $purchase->purchase_id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure?')">Supprimer</button>
+                        </form>
+                    </td>
                 </tr>
+                
             @endforeach
         </table>
     @endif
+</div>
+    
 
-    <hr>
+<div class="">
 
-    <h3>📜 Intervention History</h3>
-    <a href="{{ route('interventions.create') }}" class="btn btn-primary mb-3">Add Intervention</a>
+    <h3>📜 Historique des interventions</h3>
+    <a href="{{ url('/interventions/create/'.$client->client_id )}}" class="btn btn-primary mb-3">Ajouter une intervention</a>
     @if($interventions->isEmpty())
-        <p>No interventions recorded.</p>
+        <p>Aucune intervention enregistrée.</p>
     @else
   
         <table class="table">
             <tr>
                 <th>ID</th>
                 <th>Date</th>
-                <th>Comment</th>
+                <th>Commentaire</th>
             </tr>
             @foreach($interventions as $intervention)
                 <tr>
                     <td>{{ $intervention->intervention_id }}</td>
                     <td>{{ $intervention->intervention_date }}</td>
                     <td>{{ $intervention->comment }}</td>
+                    <td>
+                        <form action="{{route('interventions.destroy', $intervention->intervention_id)}}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure?')">Supprimer</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </table>
     @endif
+</div>
 
 @endsection
