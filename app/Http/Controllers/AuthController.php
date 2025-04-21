@@ -20,7 +20,7 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|min:4|confirmed'
         ]);
-        dd($request->password.' '.$request->password_confirmation);
+       
 
         User::create([
             'name' => $request->name,
