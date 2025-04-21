@@ -1,7 +1,9 @@
 
 <nav class="navbar navbar-expand-sm navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Logo</a>
+      <a class="navbar-brand" href="#">
+        <img src="{{ asset('safiFire.jpg') }}" alt="Logo" width="50" height="50">
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
       </button>

@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'créer Extincteur')
 
 @section('content')
     <h2>Ajouter un nouvel extincteur</h2>

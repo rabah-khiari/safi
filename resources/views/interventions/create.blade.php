@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Créer intervention')
 
 @section('content')
 <div class="container">

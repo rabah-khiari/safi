@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Créer affectation')
 
 @section('content')
     <h2>Ajouter un nouvel affectation pour {{ $clients->name }}</h2>

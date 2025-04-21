@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'affectation')
 
 @section('content')
 <a class="btn btn-primary btn-sm" href="{{ url('/clients/' . $client->client_id . '/edit') }}" >Éditer le client </a>

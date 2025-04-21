@@ -44,7 +44,7 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            return redirect('/dashboard');
+            return redirect('/clients');
         }
         return back()->withErrors(['login' => 'Email or password is incorrect.'])->withInput();
 

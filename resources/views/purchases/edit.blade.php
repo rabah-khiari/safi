@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'éditer affectation')
 
 @section('content')
     <h2>Editer affectation pour : {{$purchase->client->name}} </h2>

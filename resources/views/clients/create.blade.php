@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Créer Client')
 
 @section('content')
 <div class="container">

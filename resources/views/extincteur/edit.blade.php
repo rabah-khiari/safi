@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'éditer Extincteur')
 
 @section('content')
     <h2>Editer extincteur</h2>
