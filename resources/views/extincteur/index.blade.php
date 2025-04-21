@@ -13,16 +13,14 @@
         <tr>
             <th>ID</th>
             <th>Type</th>
-            <th>Size</th>
-            <th>Stock</th>
+            
             <th>Actions</th>
         </tr>
         @foreach($extinguishers as $extinguisher)
             <tr>
                 <td>{{ $extinguisher->extinguisher_id }}</td>
                 <td>{{ $extinguisher->type }}</td>
-                <td>{{ $extinguisher->size }} L</td>
-                <td>{{ $extinguisher->stock }}</td>
+                
                 <td>
                     <a class="btn btn-success" href="{{ route('extincteur.edit', $extinguisher->extinguisher_id) }}">Editer</a>
                     <form action="{{ route('extincteur.destroy', $extinguisher->extinguisher_id) }}" method="POST" style="display:inline;">

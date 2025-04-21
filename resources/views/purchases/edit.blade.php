@@ -19,7 +19,7 @@
         <select class="form-control" name="extinguisher_id" required>
             @foreach($extinguishers as $extinguisher)
                 <option value="{{ $extinguisher->extinguisher_id }}" {{ $purchase->extinguisher_id == $extinguisher->extinguisher_id ? 'selected' : '' }}>
-                    {{ $extinguisher->type }} - {{ $extinguisher->size }}L
+                    {{ $extinguisher->type }} 
                 </option>
             @endforeach
         </select>

@@ -99,9 +99,8 @@ class ClientsController extends Controller {
     // Fetch purchases with extinguisher details
     $purchases = Purchase::where('client_id', $client_id)
         ->join('extinguishers', 'purchases.extinguisher_id', '=', 'extinguishers.extinguisher_id')
-        ->select('purchases.*', 'extinguishers.type', 'extinguishers.size')
+        ->select('purchases.*', 'extinguishers.type')
         ->get();
-        
 
     // Fetch interventions sorted by latest date
     $interventions = Intervention::where('client_id', $client_id)

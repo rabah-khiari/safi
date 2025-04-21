@@ -22,7 +22,7 @@
             <tr>
                 <td>{{ $purchase->purchase_id }}</td>
                 <td>{{ $purchase->client->name ?? 'N/A' }}</td>
-                <td>{{ $purchase->extinguisher->type }} - {{ $purchase->extinguisher->size }}L</td>
+                <td>{{ $purchase->extinguisher->type }} </td>
                 <td>{{ $purchase->quantity }}</td>
                 <td>{{ $purchase->intervention_date }}</td>
                 <td>

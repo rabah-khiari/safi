@@ -23,9 +23,7 @@ class ExtinguisherController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'type' => 'required|string',
-            'size' => 'required|numeric|min:0.1',
-            'stock' => 'required|integer|min:0',
+            'type' => 'required|string'
         ]);
 
         Extinguisher::create($request->all());
@@ -44,9 +42,7 @@ class ExtinguisherController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'type' => 'required|string',
-            'size' => 'required|numeric|min:0.1',
-            'stock' => 'required|integer|min:0',
+            'type' => 'required|string'
         ]);
 
         $extinguisher = Extinguisher::findOrFail($id);
